@@ -1,0 +1,14 @@
+@BASE_URL = http://localhost:8080
+### GET request
+GET {{BASE_URL}}/api/v1/customers/welcome
+
+### GET request Locale
+GET {{BASE_URL}}/api/v1/customers/greet/Felipe
+
+### GET request Locale (Spanish)
+GET {{BASE_URL}}/api/v1/customers/greet/Felipe
+Accept-Language: es
+
+### GET Request customers
+GET {{BASE_URL}}/api/v1/customers
+Content-Type: application/json
