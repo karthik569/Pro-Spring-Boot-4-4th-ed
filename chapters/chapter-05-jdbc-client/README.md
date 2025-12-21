@@ -1,6 +1,6 @@
-# Chapter 6: JDBC Client with Spring Boot
+# Chapter 5: JDBC Client with Spring Boot
 
-This directory contains the source code for Chapter 6 of the book "Pro Spring Boot 4".
+This directory contains the source code for Chapter 5 of the book "Pro Spring Boot 4".
 
 ## Learning Objectives
 - Explore new Spring Framework 6 JDBC Client
