@@ -43,6 +43,45 @@
     - Added `CustomerRepositoryTest` using Mockito.
     - Added and fixed `ManagementCustomerRepositoryTest` to correctly mock `JdbcClient.MappedQuerySpec.optional()`.
     - Fixed `ManagementApplicationTests` by resolving SQL grammar issues and mapping mismatches.
+
+## Chapter 6: Spring Data with Spring Boot
+
+### Customer Project (Maven) - Spring Data JDBC
+- **Dependencies**: Replaced `spring-boot-starter-jdbc` with `spring-boot-starter-data-jdbc`.
+- **Model**: 
+    - Reverted `Customer` to a `record`.
+    - Implemented `Persistable<UUID>` to explicitly handle the entity's "new" state (`id == null`).
+    - Added `@Table("customer")` and `@Id` annotations.
+- **Persistence**: 
+    - Updated `CustomerRepository` to extend `ListCrudRepository<Customer, UUID>`.
+    - Restored `schema.sql` (required for JDBC) with `UUID DEFAULT random_uuid()` for H2 compatibility.
+- **Configuration**: Updated `application-dev.properties` to enable SQL initialization (`spring.sql.init.mode=always`).
+- **Testing**: 
+    - Implemented `CustomerRepositoryTest` using `@SpringBootTest` and `@Transactional`.
+    - Isolated repository tests using a unique DB name (`jdbc:h2:mem:customer_repo_test`) to avoid conflicts with `CustomerConfiguration`.
+    - Updated `CustomerApplicationTests` to use Record accessors and verify creation logic.
+    - Standardized `pom.xml` test dependencies.
+    - Verified all tests pass via `./mvnw test`.
+
+### Management Project (Gradle) - Spring Data JPA
+    - Added `findByCustomerCustomerId(UUID)` method to `AddressRepository` and `CommunicationRepository`.
+    - Added derived query `findByLastName(String)` and `@Query` (JPQL) `findByEmailDomain(String)` to `CustomerRepository`.
+    - Added `findByEmailWithCompany(String)` (JOIN FETCH) and `findByCompanyCompanyId(UUID, Pageable)` (Pagination) to `CustomerRepository`.
+    - Added `findByCityWithCustomer(String)` (JOIN FETCH) to `AddressRepository`.
+    - Removed custom `Repository` interface and `JdbcClient` implementations.
+- **Service Layer**:
+    - Refactored `ManagementService` to work with Entities and Relationships (setting object references instead of IDs).
+    - Updated `getCustomerDetails` to traverse the object graph (`customer.getCompany()`).
+- **Configuration**:
+    - Updated `application.yml` to set `jpa.hibernate.ddl-auto` (`create-drop` for dev, `update` for prod) and removed `schema.sql`.
+- **Testing**:
+    - Updated `ManagementApplicationTests` to use Entity getters.
+    - Implemented `ManagementCustomerRepositoryTest` using `@SpringBootTest` and `@Transactional` to verify JPA repository logic, including fetch joins and pagination.
+    - Created `ManagementAddressRepositoryTest` to verify fetch joins.
+
+### Key Learning Points
+- **Spring Data JDBC** requires explicit `schema.sql` and manual handling of ID generation/state (e.g., `Persistable`). Supports derived queries and native SQL in `@Query`.
+- **Spring Data JPA** provides automatic DDL generation and sophisticated object graph mapping. Supports JPQL and native SQL in `@Query`.
     - Verified all tests pass via `./gradlew test`.
 
 ### General
