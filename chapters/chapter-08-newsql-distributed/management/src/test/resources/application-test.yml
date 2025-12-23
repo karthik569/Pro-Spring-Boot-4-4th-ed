@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: management-test
+  datasource:
+    url: jdbc:postgresql://localhost:26257/management_db?sslmode=disable
+    username: root
+    password: ''
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.CockroachDialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+  cache:
+    type: simple
+  # Disable Redis auto-configuration for tests - using in-memory cache
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+
+app:
+  init-data: false
+
+logging:
+  level:
+    com.apress.crm: INFO
+    org.hibernate: WARN

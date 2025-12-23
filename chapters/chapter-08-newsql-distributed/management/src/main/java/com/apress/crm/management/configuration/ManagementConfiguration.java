@@ -11,6 +11,7 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
+import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
@@ -19,7 +20,8 @@ public class ManagementConfiguration {
     // Listing 7-9: Reactive routes bean
     @Bean
     public RouterFunction<ServerResponse> managementRoutes(ManagementHandlers handlers) {
-        return route(GET("/api/v1/management/customers/{id}"), handlers::getCustomerDetails);
+        return route(GET("/api/v1/management/customers/{id}"), handlers::getCustomerDetails)
+                .andRoute(POST("/api/v1/management/webhooks/customer-sync"), handlers::handleCustomerSync);
     }
 
     // Listing 7-9: Data initialization using ApplicationListener
