@@ -1,0 +1,278 @@
+Initialized native services in: /Users/felipeg/.gradle/native
+Initialized jansi services in: /Users/felipeg/.gradle/native
+The client will now receive all logging from the daemon (pid: 6431). The daemon log file: /Users/felipeg/.gradle/daemon/9.2.1/daemon-6431.out.log
+Starting 8th build in daemon [uptime: 4 mins 26.599 secs, performance: 100%, GC rate: 0.00/s, heap usage: 4% of 512 MiB, non-heap usage: 17% of 384 MiB]
+Using 16 worker leases.
+Operational build model parameters: {requiresToolingModels=false, parallelProjectExecution=false, configureOnDemand=false, configurationCache=false, configurationCacheParallelStore=false, configurationCacheParallelLoad=true, isolatedProjects=false, parallelProjectConfiguration=false, intermediateModelCache=false, parallelToolingApiActions=false, invalidateCoupledProjects=false, modelAsProjectDependency=false, resilientModelBuilding=false}
+Now considering [/Users/felipeg/Progs/Langs/JVM/java/frameworks/spring-boot/books/pro-spring-boot-4/chapters/chapter-07-nosql/management] as hierarchies to watch
+Watching the file system is configured to be enabled if available
+File system watching is active
+Starting Build
+Settings evaluated using settings file '/Users/felipeg/Progs/Langs/JVM/java/frameworks/spring-boot/books/pro-spring-boot-4/chapters/chapter-07-nosql/management/settings.gradle'.
+Projects loaded. Root project using build file '/Users/felipeg/Progs/Langs/JVM/java/frameworks/spring-boot/books/pro-spring-boot-4/chapters/chapter-07-nosql/management/build.gradle'.
+Included projects: [root project 'management']
+
+> Configure project :
+Evaluating root project 'management' using build file '/Users/felipeg/Progs/Langs/JVM/java/frameworks/spring-boot/books/pro-spring-boot-4/chapters/chapter-07-nosql/management/build.gradle'.
+Resolved plugin [id: 'java']
+Resolved plugin [id: 'org.springframework.boot', version: '4.0.1']
+Resolved plugin [id: 'io.spring.dependency-management', version: '1.1.7']
+Applying dependency management to configuration 'annotationProcessor' in project 'management'
+Applying dependency management to configuration 'apiElements' in project 'management'
+Applying dependency management to configuration 'archives' in project 'management'
+Applying dependency management to configuration 'bootArchives' in project 'management'
+Applying dependency management to configuration 'compileClasspath' in project 'management'
+Applying dependency management to configuration 'compileOnly' in project 'management'
+Applying dependency management to configuration 'default' in project 'management'
+Applying dependency management to configuration 'developmentOnly' in project 'management'
+Applying dependency management to configuration 'implementation' in project 'management'
+Applying dependency management to configuration 'mainSourceElements' in project 'management'
+Applying dependency management to configuration 'productionRuntimeClasspath' in project 'management'
+Applying dependency management to configuration 'runtimeClasspath' in project 'management'
+Applying dependency management to configuration 'runtimeElements' in project 'management'
+Applying dependency management to configuration 'runtimeOnly' in project 'management'
+Applying dependency management to configuration 'testAndDevelopmentOnly' in project 'management'
+Applying dependency management to configuration 'testAnnotationProcessor' in project 'management'
+Applying dependency management to configuration 'testCompileClasspath' in project 'management'
+Applying dependency management to configuration 'testCompileOnly' in project 'management'
+Applying dependency management to configuration 'testImplementation' in project 'management'
+Applying dependency management to configuration 'testResultsElementsForTest' in project 'management'
+Applying dependency management to configuration 'testRuntimeClasspath' in project 'management'
+Applying dependency management to configuration 'testRuntimeOnly' in project 'management'
+All projects evaluated.
+Task name matched 'test'
+Selected primary task 'test' from project :
+Starting process 'command '/usr/libexec/java_home''. Working directory: /Users/felipeg/.gradle/daemon/9.2.1 Command: /usr/libexec/java_home -V
+Successfully started process 'command '/usr/libexec/java_home''
+Resolving global dependency management for project 'management'
+Excluding []
+Excluding []
+Excluding []
+Excluding []
+Excluding []
+Excluding []
+Tasks to be executed: [task ':compileJava', task ':processResources', task ':classes', task ':compileTestJava', task ':processTestResources', task ':testClasses', task ':test']
+Tasks that were excluded: []
+Resolve mutations for :compileJava (Thread[#1757,Execution worker,5,main]) started.
+:compileJava (Thread[#1757,Execution worker,5,main]) started.
+This JVM does not support getting OS memory, so no OS memory status updates will be broadcast
+
+> Task :compileJava
+Custom actions are attached to task ':compileJava'.
+Caching disabled for task ':compileJava' because:
+  Build cache is disabled
+Task ':compileJava' is not up-to-date because:
+  Input property 'stableSources' file /Users/felipeg/Progs/Langs/JVM/java/frameworks/spring-boot/books/pro-spring-boot-4/chapters/chapter-07-nosql/management/src/main/java/com/apress/crm/management/configuration/Neo4jConfig.java has changed.
+Compilation mode: default, forking compiler
+Created classpath snapshot for incremental compilation in 0.012 secs.
+Compiling with toolchain '/Users/felipeg/.sdkman/candidates/java/21.0.2-tem'.
+Log level has changed, stopping idle worker daemon with out-of-date log level.
+Starting process 'Gradle Worker Daemon 9'. Working directory: /Users/felipeg/.gradle/workers Command: /Users/felipeg/.sdkman/candidates/java/21.0.2-tem/bin/java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED @/Users/felipeg/.gradle/.tmp/gradle-worker-classpath16482014378890648396txt -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant worker.org.gradle.process.internal.worker.GradleWorkerMain 'Gradle Worker Daemon 9'
+Successfully started process 'Gradle Worker Daemon 9'
+Started Gradle worker daemon (0.192 secs) with fork options DaemonForkOptions{executable=/Users/felipeg/.sdkman/candidates/java/21.0.2-tem/bin/java, minHeapSize=null, maxHeapSize=null, jvmArgs=[--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED, --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED], keepAliveMode=DAEMON}.
+Compiling with JDK Java compiler API.
+Incremental compilation of 1 classes completed in 0.666 secs.
+Class dependency analysis for incremental compilation took 0.001 secs.
+Resolve mutations for :processResources (Thread[#1757,Execution worker,5,main]) started.
+:processResources (Thread[#1757,Execution worker,5,main]) started.
+
+> Task :processResources UP-TO-DATE
+Caching disabled for task ':processResources' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':processResources' as it is up-to-date.
+Resolve mutations for :classes (Thread[#1757,Execution worker,5,main]) started.
+:classes (Thread[#1757,Execution worker,5,main]) started.
+
+> Task :classes
+Skipping task ':classes' as it has no actions.
+Resolve mutations for :compileTestJava (Thread[#1757,Execution worker,5,main]) started.
+:compileTestJava (Thread[#1757,Execution worker,5,main]) started.
+
+> Task :compileTestJava UP-TO-DATE
+Custom actions are attached to task ':compileTestJava'.
+Caching disabled for task ':compileTestJava' because:
+  Build cache is disabled
+Task ':compileTestJava' is not up-to-date because:
+  Input property 'classpath' file /Users/felipeg/Progs/Langs/JVM/java/frameworks/spring-boot/books/pro-spring-boot-4/chapters/chapter-07-nosql/management/build/classes/java/main/com/apress/crm/management/configuration/Neo4jConfig.class has changed.
+Compilation mode: default, forking compiler
+Created classpath snapshot for incremental compilation in 0.01 secs.
+None of the classes needs to be compiled! Analysis took 0.021 secs. 
+Resolve mutations for :processTestResources (Thread[#1757,Execution worker,5,main]) started.
+:processTestResources (Thread[#1757,Execution worker,5,main]) started.
+
+> Task :processTestResources NO-SOURCE
+Skipping task ':processTestResources' as it has no source files and no previous output files.
+Resolve mutations for :testClasses (Thread[#1757,Execution worker,5,main]) started.
+:testClasses (Thread[#1757,Execution worker,5,main]) started.
+
+> Task :testClasses UP-TO-DATE
+Skipping task ':testClasses' as it has no actions.
+Resolve mutations for :test (Thread[#1757,Execution worker,5,main]) started.
+:test (Thread[#1757,Execution worker,5,main]) started.
+Gradle Test Executor 10 started executing tests.
+
+> Task :test
+Caching disabled for task ':test' because:
+  Build cache is disabled
+Task ':test' is not up-to-date because:
+  Task has failed previously.
+Starting process 'Gradle Test Executor 10'. Working directory: /Users/felipeg/Progs/Langs/JVM/java/frameworks/spring-boot/books/pro-spring-boot-4/chapters/chapter-07-nosql/management Command: /Users/felipeg/.sdkman/candidates/java/21.0.2-tem/bin/java -Dorg.gradle.internal.worker.tmpdir=/Users/felipeg/Progs/Langs/JVM/java/frameworks/spring-boot/books/pro-spring-boot-4/chapters/chapter-07-nosql/management/build/tmp/test/work @/Users/felipeg/.gradle/.tmp/gradle-worker-classpath17730399346607521884txt -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -ea worker.org.gradle.process.internal.worker.GradleWorkerMain 'Gradle Test Executor 10'
+Successfully started process 'Gradle Test Executor 10'
+
+ReferralRepositoryTest STANDARD_OUT
+    14:10:16.945 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.apress.crm.management.repository.ReferralRepositoryTest]: ReferralRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+    14:10:16.960 [Test worker] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+    14:10:16.961 [Test worker] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+    14:10:16.967 [Test worker] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 2.0.3
+    14:10:17.060 [Test worker] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+    14:10:17.244 [Test worker] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+    14:10:17.245 [Test worker] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is localhost
+    14:10:17.257 [Test worker] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+      Server Version: 29.1.2
+      API Version: 1.52
+      Operating System: Docker Desktop
+      Total Memory: 32547 MB
+      Labels: 
+        com.docker.desktop.address=unix:///Users/felipeg/Library/Containers/com.docker.docker/Data/docker-cli.sock
+    14:10:17.532 [Test worker] INFO tc.testcontainers/ryuk:0.13.0 -- Creating container for image: testcontainers/ryuk:0.13.0
+    14:10:17.638 [Test worker] INFO tc.testcontainers/ryuk:0.13.0 -- Container testcontainers/ryuk:0.13.0 is starting: 43551d29b3b69ef8802a4f669834c85c34e22775b6e2e6377b7e78afa43a1670
+    14:10:17.775 [Test worker] INFO tc.testcontainers/ryuk:0.13.0 -- Container testcontainers/ryuk:0.13.0 started in PT0.242568S
+    14:10:17.778 [Test worker] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+    14:10:17.778 [Test worker] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+    14:10:17.778 [Test worker] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+    14:10:17.823 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.apress.crm.management.ManagementApplication for test class com.apress.crm.management.repository.ReferralRepositoryTest
+    14:10:17.857 [Test worker] INFO tc.neo4j:5.26.0 -- Creating container for image: neo4j:5.26.0
+    14:10:17.881 [Test worker] INFO tc.neo4j:5.26.0 -- Container neo4j:5.26.0 is starting: 874cca0eceb7a66779dc8d2a205357a60e4f1d2484f7416d6872e67e98be5438
+    14:10:21.949 [ducttape-0] INFO org.testcontainers.containers.wait.strategy.HttpWaitStrategy -- /pensive_haslett: Waiting for 120 seconds for URL: http://localhost:56584/ (where port 56584 maps to container port 7474)
+    14:10:23.051 [Test worker] INFO tc.neo4j:5.26.0 -- Container neo4j:5.26.0 started in PT5.193355S
+    14:10:23.052 [Test worker] INFO tc.redis:alpine -- Creating container for image: redis:alpine
+    14:10:23.086 [Test worker] INFO tc.redis:alpine -- Container redis:alpine is starting: ddf74df429a1c7b1767f1369fb49e61e9da02e5ffb3a62e5f54f3deb2c1776be
+    14:10:23.198 [Test worker] INFO tc.redis:alpine -- Container redis:alpine started in PT0.146048S
+
+      .   ____          _            __ _ _
+     /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+    ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+     \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+      '  |____| .__|_| |_|_| |_\__, | / / / /
+     =========|_|==============|___/=/_/_/_/
+
+     :: Spring Boot ::                (v4.0.1)
+
+    2025-12-22T14:10:23.362-05:00  INFO 8346 --- [management] [    Test worker] c.a.c.m.r.ReferralRepositoryTest         : Starting ReferralRepositoryTest using Java 21.0.2 with PID 8346 (started by felipeg in /Users/felipeg/Progs/Langs/JVM/java/frameworks/spring-boot/books/pro-spring-boot-4/chapters/chapter-07-nosql/management)
+    2025-12-22T14:10:23.362-05:00 DEBUG 8346 --- [management] [    Test worker] c.a.c.m.r.ReferralRepositoryTest         : Running with Spring Boot v4.0.1, Spring v7.0.2
+    2025-12-22T14:10:23.362-05:00  INFO 8346 --- [management] [    Test worker] c.a.c.m.r.ReferralRepositoryTest         : The following 1 profile is active: "test"
+    2025-12-22T14:10:23.508-05:00  INFO 8346 --- [management] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+    2025-12-22T14:10:23.508-05:00  INFO 8346 --- [management] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+    2025-12-22T14:10:23.560-05:00  INFO 8346 --- [management] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 47 ms. Found 4 JPA repository interfaces.
+    2025-12-22T14:10:23.561-05:00  INFO 8346 --- [management] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+    2025-12-22T14:10:23.562-05:00  INFO 8346 --- [management] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Neo4j repositories in DEFAULT mode.
+    2025-12-22T14:10:23.565-05:00  INFO 8346 --- [management] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 1 Neo4j repository interface.
+    2025-12-22T14:10:23.637-05:00  INFO 8346 --- [management] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+    2025-12-22T14:10:23.638-05:00  INFO 8346 --- [management] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Neo4j repositories in DEFAULT mode.
+    2025-12-22T14:10:23.642-05:00  INFO 8346 --- [management] [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.apress.crm.management.repository.jpa.AddressRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+    2025-12-22T14:10:23.643-05:00  INFO 8346 --- [management] [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.apress.crm.management.repository.jpa.CommunicationRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+    2025-12-22T14:10:23.643-05:00  INFO 8346 --- [management] [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.apress.crm.management.repository.jpa.CompanyRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+    2025-12-22T14:10:23.643-05:00  INFO 8346 --- [management] [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Neo4j - Could not safely identify store assignment for repository candidate interface com.apress.crm.management.repository.jpa.CustomerRepository; If you want this repository to be a Neo4j repository, consider annotating your entities with one of these annotations: org.springframework.data.neo4j.core.schema.Node, org.springframework.data.neo4j.core.schema.RelationshipProperties (preferred), or consider extending one of the following types with your repository: org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
+    2025-12-22T14:10:23.643-05:00  INFO 8346 --- [management] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4 ms. Found 0 Neo4j repository interfaces.
+    2025-12-22T14:10:23.662-05:00  INFO 8346 --- [management] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+    2025-12-22T14:10:23.662-05:00  INFO 8346 --- [management] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+    2025-12-22T14:10:23.668-05:00  INFO 8346 --- [management] [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.apress.crm.management.repository.jpa.AddressRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+    2025-12-22T14:10:23.668-05:00  INFO 8346 --- [management] [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.apress.crm.management.repository.jpa.CommunicationRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+    2025-12-22T14:10:23.668-05:00  INFO 8346 --- [management] [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.apress.crm.management.repository.jpa.CompanyRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+    2025-12-22T14:10:23.668-05:00  INFO 8346 --- [management] [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.apress.crm.management.repository.jpa.CustomerRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+    2025-12-22T14:10:23.669-05:00  INFO 8346 --- [management] [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.apress.crm.management.repository.neo4j.ReferralRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+    2025-12-22T14:10:23.669-05:00  INFO 8346 --- [management] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
+    2025-12-22T14:10:23.888-05:00  INFO 8346 --- [management] [    Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+    2025-12-22T14:10:23.914-05:00  INFO 8346 --- [management] [    Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.0.Final
+    2025-12-22T14:10:24.075-05:00  INFO 8346 --- [management] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+    2025-12-22T14:10:24.090-05:00  INFO 8346 --- [management] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+    2025-12-22T14:10:24.159-05:00  INFO 8346 --- [management] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:management user=SA
+    2025-12-22T14:10:24.160-05:00  INFO 8346 --- [management] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+    2025-12-22T14:10:24.169-05:00  WARN 8346 --- [management] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+    2025-12-22T14:10:24.177-05:00  INFO 8346 --- [management] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+    	Database JDBC URL [jdbc:h2:mem:management]
+    	Database driver: H2 JDBC Driver
+    	Database dialect: H2Dialect
+    	Database version: 2.4.240
+    	Default catalog/schema: MANAGEMENT/PUBLIC
+    	Autocommit mode: undefined/unknown
+    	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+    	JDBC fetch size: 100
+    	Pool: DataSourceConnectionProvider
+    	Minimum pool size: undefined/unknown
+    	Maximum pool size: undefined/unknown
+    2025-12-22T14:10:24.564-05:00  INFO 8346 --- [management] [    Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+    2025-12-22T14:10:24.584-05:00  INFO 8346 --- [management] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+    2025-12-22T14:10:24.621-05:00  INFO 8346 --- [management] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+    2025-12-22T14:10:24.765-05:00  INFO 8346 --- [management] [    Test worker] o.neo4j.driver.internal.DriverFactory    : Driver instance 1631950876 created for server uri 'bolt://localhost:56585'
+    2025-12-22T14:10:25.178-05:00  INFO 8346 --- [management] [    Test worker] o.s.boot.reactor.netty.NettyWebServer    : Netty started on port 56971 (http)
+    2025-12-22T14:10:25.187-05:00  INFO 8346 --- [management] [    Test worker] c.a.c.m.r.ReferralRepositoryTest         : Started ReferralRepositoryTest in 1.948 seconds (process running for 8.686)
+
+ReferralRepositoryTest > shouldTraverseReferralPath() STANDARD_ERROR
+    Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+    WARNING: A Java agent has been loaded dynamically (/Users/felipeg/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.17.8/f09415827a71be7ed621c7bd02550678f28bc81c/byte-buddy-agent-1.17.8.jar)
+    WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+    WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+    WARNING: Dynamic loading of agents will be disallowed by default in a future release
+
+ReferralRepositoryTest > shouldTraverseReferralPath() STANDARD_OUT
+      DEBUG: alice.getReferrals()=[]
+      DEBUG: bob.getReferrals()=[]
+
+ReferralRepositoryTest > shouldTraverseReferralPath() FAILED
+    java.lang.NullPointerException
+        at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+        at org.springframework.data.neo4j.core.Neo4jTemplate.execute(Neo4jTemplate.java:199)
+        at org.springframework.data.neo4j.core.Neo4jTemplate.save(Neo4jTemplate.java:398)
+        at org.springframework.data.neo4j.repository.support.SimpleNeo4jRepository.save(SimpleNeo4jRepository.java:123)
+        at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+        at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+        at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:278)
+        at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:169)
+        at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+        at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:545)
+        at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:290)
+        at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:690)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:171)
+        at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:146)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:370)
+        at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:118)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+        at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:222)
+        at jdk.proxy3/jdk.proxy3.$Proxy188.save(Unknown Source)
+        at com.apress.crm.management.repository.ReferralRepositoryTest.shouldTraverseReferralPath(ReferralRepositoryTest.java:26)
+
+Gradle Test Executor 10 finished executing tests.
+2025-12-22T14:10:26.079-05:00  INFO 8346 --- [management] [ionShutdownHook] o.s.boot.reactor.netty.GracefulShutdown  : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-22T14:10:26.083-05:00  INFO 8346 --- [management] [ netty-shutdown] o.s.boot.reactor.netty.GracefulShutdown  : Graceful shutdown complete
+2025-12-22T14:10:28.418-05:00  INFO 8346 --- [management] [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-22T14:10:28.432-05:00  INFO 8346 --- [management] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-22T14:10:28.436-05:00  INFO 8346 --- [management] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+
+> Task :test FAILED
+
+1 test completed, 1 failed
+Finished generating test XML results (0.001 secs) into: /Users/felipeg/Progs/Langs/JVM/java/frameworks/spring-boot/books/pro-spring-boot-4/chapters/chapter-07-nosql/management/build/test-results/test
+Generating HTML test report...
+Finished generating test html results (0.001 secs) into: /Users/felipeg/Progs/Langs/JVM/java/frameworks/spring-boot/books/pro-spring-boot-4/chapters/chapter-07-nosql/management/build/reports/tests/test
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':test'.
+> There were failing tests. See the report at: file:///Users/felipeg/Progs/Langs/JVM/java/frameworks/spring-boot/books/pro-spring-boot-4/chapters/chapter-07-nosql/management/build/reports/tests/test/index.html
+
+* Try:
+> Run with --scan to generate a Build Scan (powered by Develocity).
+
+BUILD FAILED in 13s
+4 actionable tasks: 2 executed, 2 up-to-date
+Watched directory hierarchies: [/Users/felipeg/Progs/Langs/JVM/java/frameworks/spring-boot/books/pro-spring-boot-4/chapters/chapter-07-nosql/management]

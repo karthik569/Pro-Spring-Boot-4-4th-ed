@@ -66,24 +66,65 @@
 ### Management Project (Gradle) - Spring Data JPA
     - Added `findByCustomerCustomerId(UUID)` method to `AddressRepository` and `CommunicationRepository`.
     - Added derived query `findByLastName(String)` and `@Query` (JPQL) `findByEmailDomain(String)` to `CustomerRepository`.
-    - Added `findByEmailWithCompany(String)` (JOIN FETCH) and `findByCompanyCompanyId(UUID, Pageable)` (Pagination) to `CustomerRepository`.
-    - Added `findByCityWithCustomer(String)` (JOIN FETCH) to `AddressRepository`.
+    - Added `findByEmailWithCompany(String)` using `JOIN FETCH` to demonstrate resolving N+1 issues in `CustomerRepository`.
+    - Added `findByCompanyCompanyId(UUID, Pageable)` to `CustomerRepository` to demonstrate pagination and sorting.
+    - Added `findByCityWithCustomer(String)` using `JOIN FETCH` to `AddressRepository`.
     - Removed custom `Repository` interface and `JdbcClient` implementations.
 - **Service Layer**:
     - Refactored `ManagementService` to work with Entities and Relationships (setting object references instead of IDs).
     - Updated `getCustomerDetails` to traverse the object graph (`customer.getCompany()`).
+    - Added `getCustomersByCompany(UUID, int, int)` to `ManagementService` with built-in `PageRequest` and `Sort` by `lastName`.
 - **Configuration**:
     - Updated `application.yml` to set `jpa.hibernate.ddl-auto` (`create-drop` for dev, `update` for prod) and removed `schema.sql`.
 - **Testing**:
-    - Updated `ManagementApplicationTests` to use Entity getters.
+    - Updated `ManagementApplicationTests` to use Entity getters and added integration test for `getCustomersByCompany`.
     - Implemented `ManagementCustomerRepositoryTest` using `@SpringBootTest` and `@Transactional` to verify JPA repository logic, including fetch joins and pagination.
-    - Created `ManagementAddressRepositoryTest` to verify fetch joins.
+    - Created `ManagementAddressRepositoryTest` to verify fetch join logic.
+
+## Chapter 7: NoSQL with Spring Boot
+
+### Customer Project (Maven) - MongoDB
+- **Dependencies**: Replaced JPA/SQL dependencies with `spring-boot-starter-data-mongodb`. Added `spring-boot-testcontainers` and `testcontainers-mongodb` for testing.
+- **Model**:
+    - Annotated `Customer` record with `@Document("customers")`.
+    - Refactored ID type to `String` for automatic MongoDB ID generation.
+    - Added `Vector vector` field to the `Customer` record to support Vector Search (AI frontier).
+- **Persistence**:
+    - Updated `CustomerRepository` to extend `MongoRepository<Customer, String>`.
+    - Implemented `findByVectorNear` with `@VectorSearch` and `Limit` parameter.
+- **Configuration**:
+    - Updated properties to use latest Spring Boot 4 `spring.mongodb.uri` (removing `data` prefix).
+- **Infrastructure**: Updated `docker-compose.yml` to use `mongo:7` with authentication.
+- **Testing**:
+    - Implemented `CustomerRepositoryTest` using `@DataMongoTest` and Testcontainers.
+    - Verified all tests pass via `./mvnw clean test`.
+
+### Management Project (Gradle) - Polyglot Persistence (JPA + Redis + Neo4j)
+- **Persistence Strategy**:
+    - **PostgreSQL (JPA)**: Core CRM data (`Customer`, `Company`, `Address`, `Communication`).
+    - **Redis**: Key-Value session storage (`CustomerSession`) using `ReactiveRedisOperations`.
+    - **Neo4j**: Graph relationships (`CustomerNode`) using blocking repositories bridged via `Schedulers.boundedElastic()`.
+- **Dependencies**: Integrated `spring-boot-starter-data-jpa`, `spring-boot-starter-data-redis-reactive`, and `spring-boot-starter-data-neo4j`.
+- **Web Layer (Listing 7-8)**:
+    - Implemented reactive `ManagementHandlers` using functional programming patterns.
+    - Configured `ManagementRoutes` to map incoming requests to reactive handler methods.
+- **Service Layer (Listing 7-7)**:
+    - Added `getCustomerWithSession(UUID customerId)`: Coordinates PostgreSQL data with Redis session status.
+    - Added `addReferral(UUID customerId, UUID referrerId)`: Manages graph relationships in Neo4j.
+- **Configuration**:
+    - Explicitly defined `JpaTransactionManager` (Primary) and `Neo4jTransactionManager` to resolve polyglot transactional conflicts.
+    - Updated `application.yml` with separate sections for all three data stores.
+    - Replaced `ApplicationReadyEvent` with `CommandLineRunner` for reliable data initialization.
+- **Infrastructure**: Updated `docker-compose.yml` to include `postgres:alpine`, `redis:7-alpine`, and `neo4j:5.26.0`.
+- **Testing**:
+    - Updated `ManagementApplicationTests` to use Testcontainers for all three databases simultaneously.
+    - Verified all tests pass via `./gradlew clean test`.
 
 ### Key Learning Points
-- **Spring Data JDBC** requires explicit `schema.sql` and manual handling of ID generation/state (e.g., `Persistable`). Supports derived queries and native SQL in `@Query`.
-- **Spring Data JPA** provides automatic DDL generation and sophisticated object graph mapping. Supports JPQL and native SQL in `@Query`.
-    - Verified all tests pass via `./gradlew test`.
-
-### General
-- Adhered to Java 21 and Spring Boot 4 standards.
-- Ensured both projects are fully functional and compile successfully.
+- **Polyglot Persistence**: Demonstrated integrating Relational (PostgreSQL), Graph (Neo4j), and Key-Value (Redis) stores in a single Spring Boot 4 application.
+- **Reactive Integration**: Bridged blocking relational/graph stores with reactive web components using Project Reactor.
+- **Transaction Management**: Resolved transaction manager conflicts in multi-store environments using explicit configuration and `@Primary`.
+- **AI Readiness (Spring Data 2025.1)**: 
+    - Leveraged the new `org.springframework.data.domain.Vector` type.
+    - Implemented Vector Search across multiple stores.
+- **Spring Boot 4 Standards**: Used updated configuration properties and latest dependency management patterns.
