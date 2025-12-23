@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: management
+  profiles:
+    active: dev
+
+app:
+  init-data: true
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:postgresql://localhost:26257/management_db?sslmode=disable
+    username: root
+    password: ''
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.CockroachDialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+logging:
+  level:
+    org.springframework.data.redis: DEBUG
+    com.apress.crm: DEBUG
