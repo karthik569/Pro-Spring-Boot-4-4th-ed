@@ -1,0 +1,35 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:26257/management_db
+    username: root
+    password:
+    pool:
+      enabled: true
+      initial-size: 5
+      max-size: 20
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  r2dbc:
+    url: r2dbc:postgresql://localhost:26257/defaultdb
+
+---
+spring:
+  config:
+    activate:
+      on-profile: oauth2
+  security:
+    oauth2:
+      authorizationserver:
+        client:
+          customer-service:
+            registration:
+              client-id: "customer-service"
+              client-authentication-methods:
+                - "tls_client_auth"
+              authorization-grant-types:
+                - "client_credentials"
+              scopes:
+                - "customer:write"
