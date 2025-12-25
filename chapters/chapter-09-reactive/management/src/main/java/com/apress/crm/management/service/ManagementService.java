@@ -61,6 +61,10 @@ public class ManagementService {
                                 "40001".equals(((R2dbcException) throwable).getSqlState())));
     }
 
+    public Mono<Customer> saveCustomer(Customer customer) {
+        return customerRepository.save(customer);
+    }
+
     public Mono<CustomerDetailsDTO> getCustomerDetails(UUID customerId) {
         return Mono.justOrEmpty(cache.get(customerId))
                 .switchIfEmpty(

@@ -61,6 +61,10 @@ public class ManagementService {
                                 "40001".equals(((R2dbcException) throwable).getSqlState())));
     }
 
+    public Mono<Customer> saveCustomer(Customer customer) {
+        return customerRepository.save(customer);
+    }
+
     public Mono<Void> triggerBackgroundSync(UUID customerId) {
         // Simulates a background operation
         return Mono.empty();

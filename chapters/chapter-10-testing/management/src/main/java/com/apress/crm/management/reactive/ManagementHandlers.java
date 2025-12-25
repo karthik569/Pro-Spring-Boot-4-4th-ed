@@ -31,15 +31,8 @@ public class ManagementHandlers {
 
     public Mono<ServerResponse> createCustomer(ServerRequest request) {
         return request.bodyToMono(Customer.class)
-                .flatMap(customer -> {
-                    // Create default associated entities for the simplified create endpoint
-                    Company company = new Company(null, "Default Company", "Technology", "example.com");
-                    Address address = new Address(null, null, "123 Default St", "City", "ST", "00000");
-                    Communication comm = new Communication(null, null, "email", customer.email());
-                    
-                    return managementService.createCustomerWithDetails(customer, company, address, comm);
-                })
-                .flatMap(details -> ServerResponse.created(URI.create("/api/v1/management/customers/" + details.customer().customerId()))
-                        .bodyValue(details.customer()));
+                .flatMap(managementService::saveCustomer)
+                .flatMap(saved -> ServerResponse.created(URI.create("/api/v1/customers/" + saved.customerId()))
+                        .bodyValue(saved));
     }
 }
