@@ -1,21 +1,18 @@
 package com.apress.crm.management;
 
 import com.apress.crm.management.service.ManagementService;
-import com.apress.crm.management.repository.AddressRepository;
-import com.apress.crm.management.repository.CommunicationRepository;
-import com.apress.crm.management.repository.CompanyRepository;
-import com.apress.crm.management.repository.CustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 @org.springframework.test.context.ActiveProfiles("test")
