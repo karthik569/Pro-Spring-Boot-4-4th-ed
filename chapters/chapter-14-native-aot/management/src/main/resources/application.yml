@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: management
+  r2dbc:
+    url: r2dbc:postgresql://localhost:26257/management_db
+    username: root
+    password:
+    pool:
+      enabled: true
+      initial-size: 5
+      max-size: 20
+  security:
+    user:
+      name: admin
+      password: admin
+      roles: ADMIN
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics,managementControl
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  info:
+    env:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+  tracing:
+    sampling:
+      probability: 1.0
+  otlp:
+    tracing:
+      endpoint: http://localhost:4318/v1/traces
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  r2dbc:
+    url: r2dbc:postgresql://localhost:26257/defaultdb
