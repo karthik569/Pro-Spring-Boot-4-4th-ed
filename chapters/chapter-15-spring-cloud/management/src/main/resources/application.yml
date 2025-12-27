@@ -1,0 +1,30 @@
+# Most configuration is externalized to Config Server
+# Only local development overrides and Spring Cloud specific config here
+
+spring:
+  security:
+    user:
+      name: admin
+      password: admin
+      roles: ADMIN
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        enabled: true
+        instance-id: ${spring.application.name}:${random.value}
+        healthCheckPath: /actuator/health
+        healthCheckInterval: 10s
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  r2dbc:
+    url: r2dbc:postgresql://localhost:26257/defaultdb

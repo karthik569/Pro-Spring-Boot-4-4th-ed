@@ -29,13 +29,14 @@ A more complex reactive application demonstrating:
 - **OpenTelemetry distributed tracing in native mode**
 - **Advanced RuntimeHintsRegistrar** for reactive entities
 - **Cloud-aware bean registration** (K8s, Cloud Foundry)
+- **CRaC (Coordinated Restore at Checkpoint)** - Alternative fast startup approach
 - Custom Observability features
 - Proof that complex Spring Boot 4 features work natively
 
 **Location**: `management/`
 **Build Tool**: Gradle
 **Key Features**: WebFlux, R2DBC, OpenTelemetry, Custom Actuator Endpoints
-**AOT Examples**: ✅ Advanced RuntimeHints, ✅ Cloud-aware Bean Registration, ✅ aot.factories
+**AOT Examples**: ✅ Advanced RuntimeHints, ✅ Cloud-aware Bean Registration, ✅ aot.factories, ✅ CRaC Support
 
 👉 [Management Project README](./management/README.md)
 
@@ -77,15 +78,18 @@ cd management
 
 ## Key Concepts Demonstrated
 
-### 1. **AOT vs JIT Compilation**
+### 1. **AOT vs JIT Compilation (and CRaC)**
 
-| Feature | JVM (JIT) | GraalVM Native (AOT) |
-|---------|-----------|---------------------|
-| Startup Time | Slow (seconds) | Fast (milliseconds) |
-| Memory Usage | High | Low |
-| Build Time | Fast | Slow (minutes) |
-| Peak Performance | Excellent | Good |
-| Flexibility | High (dynamic) | Limited (static) |
+| Feature | JVM (JIT) | GraalVM Native (AOT) | CRaC (Checkpoint/Restore) |
+|---------|-----------|----------------------|---------------------------|
+| Startup Time | Slow (seconds) | Fast (milliseconds) | Very Fast (restore) |
+| Memory Usage | High | Very Low | Low |
+| Build Time | Fast | Slow (minutes) | Fast |
+| Peak Performance | Excellent | Good | Excellent (JIT preserved) |
+| Flexibility | High (dynamic) | Limited (static) | High (dynamic) |
+| Requirements | Standard JDK | GraalVM | CRaC-enabled JDK |
+
+**Note**: The Management project demonstrates CRaC as an alternative to Native compilation for scenarios requiring both fast startup and peak JIT performance.
 
 ### 2. **Spring AOT Engine**
 
@@ -105,9 +109,9 @@ Expected improvements when running native:
 | **Memory** | ~70% reduction | ~75% reduction |
 | **Container** | ~65% smaller | ~70% smaller |
 
-### 4. **Native Compatibility**
+### 4. **Native & CRaC Compatibility**
 
-Both projects prove that complex Spring features work in native mode:
+Both projects prove that complex Spring features work in native mode and with CRaC:
 - ✅ Spring MVC / WebFlux
 - ✅ JPA / R2DBC
 - ✅ Security
@@ -116,6 +120,7 @@ Both projects prove that complex Spring features work in native mode:
 - ✅ **OpenTelemetry Distributed Tracing**
 - ✅ Custom Observation Handlers
 - ✅ Testcontainers
+- ✅ **CRaC Resource Management** (Management project)
 
 ## Advanced Topics Covered
 
@@ -187,6 +192,65 @@ public class CrmBeanRegistrar implements AotBeanRegistrar {
 }
 ```
 
+### CRaC Support (Management Project Only)
+
+**CRaC (Coordinated Restore at Checkpoint)** is an OpenJDK project that provides an alternative approach to fast startup: take a snapshot of a running JVM and restore it later.
+
+**Location**: `management/src/main/java/com/apress/crm/management/crac/`
+
+**Key Classes:**
+- `CracManagedConnection` - Implements `org.crac.Resource` interface
+- `NetworkConnection` - Helper class demonstrating resource management
+
+**How it works:**
+```java
+@Component
+@ConditionalOnProperty(name = "management.crac.enabled", havingValue = "true")
+public class CracManagedConnection implements Resource {
+
+    public CracManagedConnection() {
+        Core.getGlobalContext().register(this);  // Register for lifecycle callbacks
+    }
+
+    @Override
+    public void beforeCheckpoint(Context<? extends Resource> context) {
+        closeConnection();  // Close I/O resources before snapshot
+    }
+
+    @Override
+    public void afterRestore(Context<? extends Resource> context) {
+        openConnection();   // Reopen resources after restore
+    }
+}
+```
+
+**CRaC vs Native Comparison:**
+
+| Feature | Native (GraalVM) | CRaC |
+|---------|------------------|------|
+| Startup | ~0.2s (cold start) | ~0.1s (restore) |
+| Memory | Very Low (~140MB) | Low (~450MB) |
+| JIT Performance | ❌ AOT only | ✅ Full JIT preserved |
+| Build Time | Slow (5+ min) | Fast (standard JAR) |
+| Requirements | GraalVM | CRaC-enabled JDK |
+| Best For | Stateless, containerized apps | Apps needing JIT performance |
+
+**When to use CRaC:**
+- You need both fast startup AND peak JIT performance
+- Application has long warm-up periods (complex initialization, class loading)
+- Can't use GraalVM Native Image (missing library support)
+- Running in environments where you can manage checkpoints
+
+**When to use Native:**
+- Minimal memory footprint is critical
+- Containerized/serverless deployments
+- Fully stateless applications
+- Smaller deployment size is important
+
+**Note**: CRaC is disabled by default (`management.crac.enabled=false`) and requires a CRaC-enabled JDK. On standard JDKs, the `org.crac:crac` library provides no-op stubs so the code compiles normally.
+
+See the [Management Project README](./management/README.md#4-crac-coordinated-restore-at-checkpoint-support) for detailed CRaC usage instructions.
+
 ### Container Optimization
 
 Both projects support building optimized container images:
@@ -243,7 +307,9 @@ Both projects support native testing:
 
 This compiles your tests into a native executable and runs them, catching native compatibility issues early.
 
-## When to Use Native Images
+## When to Use Native Images vs CRaC
+
+### Use Native Images (GraalVM)
 
 **Good fit:**
 - ☁️ Cloud-native microservices
@@ -252,11 +318,25 @@ This compiles your tests into a native executable and runs them, catching native
 - 💰 Cost-sensitive deployments (memory = money)
 - 🐳 Containerized applications
 - 📦 CLI tools
+- Kubernetes deployments with auto-scaling
 
 **May not be ideal:**
-- Long-running applications (JIT optimizations matter more)
-- Applications using heavy reflection/dynamic features
+- Long-running applications where peak performance matters more than startup
+- Applications using heavy reflection/dynamic features (though Spring Boot 4 handles most cases)
 - Development environments (slow build times)
+
+### Use CRaC (Alternative)
+
+**Good fit:**
+- 🚀 Fast startup + peak JIT performance needed
+- 📊 Applications with complex initialization (data loading, model training)
+- 🔄 Environments where you control checkpoint/restore (specialized containers)
+- 💼 Enterprise apps that can't migrate to Native (library compatibility)
+
+**May not be ideal:**
+- Standard containerized environments (checkpoint portability issues)
+- Highly stateful applications (difficult to checkpoint cleanly)
+- When minimal memory footprint is critical (CRaC uses more memory than Native)
 
 ## Troubleshooting
 
@@ -297,7 +377,10 @@ Each project README includes detailed benchmarking instructions:
 
 - [Spring Boot Native Documentation](https://docs.spring.io/spring-boot/reference/native-image/)
 - [GraalVM Native Image](https://www.graalvm.org/latest/reference-manual/native-image/)
+- [CRaC Project](https://openjdk.org/projects/crac/)
+- [CRaC GitHub](https://github.com/CRaC/docs)
 - [Cloud Native Buildpacks](https://buildpacks.io/)
+- [AOT Features Guide](./AOT-FEATURES-GUIDE.md) - Quick reference for all AOT patterns
 - Book: Pro Spring Boot 4, Chapter 14
 
 ## Summary
@@ -308,8 +391,9 @@ This chapter demonstrates that:
 - ✅ Native executables offer **dramatic performance improvements**
 - ✅ Build tools (Maven & Gradle) make it **easy to enable**
 - ✅ Spring's AOT engine handles most **dynamic behavior automatically**
+- ✅ **CRaC provides an alternative** for apps needing both fast startup and JIT performance
 
-Native compilation is a powerful deployment option that can significantly reduce costs and improve user experience in cloud-native environments.
+Native compilation and CRaC are powerful deployment options that can significantly reduce costs and improve user experience in cloud-native environments. Choose Native for minimal footprint and portability, or CRaC for peak performance with fast startup.
 
 ---
 

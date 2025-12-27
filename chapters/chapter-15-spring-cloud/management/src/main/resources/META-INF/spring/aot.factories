@@ -1,0 +1,10 @@
+# AOT Runtime Hints Registration for Management Application
+# This file registers RuntimeHintsRegistrar implementations that provide
+# comprehensive hints to GraalVM Native Image for:
+# - Reflection (domain models, DTOs)
+# - Resources (configuration files, migrations)
+# - Serialization (JSON, reactive streams)
+# - Proxies (reactive repositories)
+
+org.springframework.aot.hint.RuntimeHintsRegistrar=\
+  com.apress.crm.management.aot.ManagementRuntimeHints

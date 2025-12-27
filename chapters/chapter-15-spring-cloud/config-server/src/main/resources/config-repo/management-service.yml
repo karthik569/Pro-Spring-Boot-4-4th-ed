@@ -1,0 +1,52 @@
+# Centralized configuration for management-service
+server:
+  port: 8082
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5433/managementdb
+    username: management
+    password: management123
+    pool:
+      enabled: true
+      initial-size: 10
+      max-size: 20
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    stream:
+      bindings:
+        # Input binding for customer events
+        onCustomerChange-in-0:
+          destination: customer-events-topic
+          group: management-group
+      rabbit:
+        bindings:
+          onCustomerChange-in-0:
+            consumer:
+              exchangeType: topic
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
+
+# Custom application properties
+crm:
+  features:
+    event-consumption: true
+    service-discovery: true

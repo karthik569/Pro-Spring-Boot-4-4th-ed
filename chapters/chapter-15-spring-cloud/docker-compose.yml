@@ -1,0 +1,79 @@
+services:
+  # HashiCorp Consul for Service Discovery
+  consul:
+    image: hashicorp/consul:1.18
+    container_name: consul
+    ports:
+      - "8500:8500"     # Consul UI and HTTP API
+      - "8600:8600/udp" # DNS interface
+    command: agent -server -ui -bootstrap-expect=1 -client=0.0.0.0
+    environment:
+      - CONSUL_BIND_INTERFACE=eth0
+    networks:
+      - spring-cloud-network
+
+  # RabbitMQ for Event-Driven Architecture (Spring Cloud Stream)
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"   # AMQP protocol port
+      - "15672:15672" # Management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - spring-cloud-network
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # PostgreSQL for Customer Service
+  postgres-customer:
+    image: postgres:16-alpine
+    container_name: postgres-customer
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: customerdb
+      POSTGRES_USER: customer
+      POSTGRES_PASSWORD: customer123
+    volumes:
+      - postgres-customer-data:/var/lib/postgresql/data
+    networks:
+      - spring-cloud-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U customer"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # PostgreSQL for Management Service (separate database for microservices pattern)
+  postgres-management:
+    image: postgres:16-alpine
+    container_name: postgres-management
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: managementdb
+      POSTGRES_USER: management
+      POSTGRES_PASSWORD: management123
+    volumes:
+      - postgres-management-data:/var/lib/postgresql/data
+    networks:
+      - spring-cloud-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U management"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  spring-cloud-network:
+    driver: bridge
+
+volumes:
+  postgres-customer-data:
+  postgres-management-data:

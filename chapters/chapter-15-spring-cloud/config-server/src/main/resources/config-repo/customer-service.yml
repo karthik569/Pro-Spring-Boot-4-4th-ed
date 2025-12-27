@@ -1,0 +1,48 @@
+# Centralized configuration for customer-service
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/customerdb
+    username: customer
+    password: customer123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    stream:
+      bindings:
+        # Output binding for customer events
+        customer-events-out-0:
+          destination: customer-events-topic
+      rabbit:
+        bindings:
+          customer-events-out-0:
+            producer:
+              exchangeType: topic
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+# Custom application properties
+crm:
+  features:
+    event-publishing: true
+    service-discovery: true

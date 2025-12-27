@@ -1,0 +1,6 @@
+# AOT Runtime Hints Registration
+# This file registers RuntimeHintsRegistrar implementations that provide
+# hints to GraalVM Native Image for reflection, resources, and serialization.
+
+org.springframework.aot.hint.RuntimeHintsRegistrar=\
+  com.apress.crm.customer.aot.CustomerRuntimeHints
