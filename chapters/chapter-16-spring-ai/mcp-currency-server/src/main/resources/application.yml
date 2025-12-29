@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: currency-server
+
+server:
+  port: 9090
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    com.apress.crm.mcp.currency: INFO

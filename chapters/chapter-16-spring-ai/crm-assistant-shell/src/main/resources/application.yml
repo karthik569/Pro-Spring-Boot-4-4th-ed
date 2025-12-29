@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: crm-assistant-shell
+  shell:
+    interactive:
+      enabled: true
+    command:
+      version:
+        enabled: false
+
+logging:
+  level:
+    com.apress.crm.shell: INFO
+    org.springframework.shell: INFO
