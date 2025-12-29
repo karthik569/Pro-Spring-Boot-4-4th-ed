@@ -1,0 +1,4 @@
+dependencies {
+    // Pull in our autoconfigure module
+    api project(':crm-assistant-autoconfigure')
+}

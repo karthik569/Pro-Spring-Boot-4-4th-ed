@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: sales-dashboard
+
+  # Spring AI configuration
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: llama3.2
+          temperature: 0.7
+      embedding:
+        options:
+          model: nomic-embed-text
+    openai:
+      api-key: ${OPENAI_API_KEY:demo}
+      chat:
+        options:
+          model: gpt-4o
+          temperature: 0.7
+    vectorstore:
+      pgvector:
+        index-type: HNSW
+        distance-type: COSINE_DISTANCE
+        dimensions: 768
+
+  # R2DBC configuration (for database agent)
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5433/managementdb
+    username: management
+    password: password
+
+  # DataSource configuration (for pgvector)
+  datasource:
+    url: jdbc:postgresql://localhost:5433/managementdb
+    username: management
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+# CRM Assistant configuration (from our custom starter)
+crm:
+  assistant:
+    enabled: true
+    chat-model: gpt-4o
+    vector-table-name: crm_vectors
+    audit:
+      enabled: true  # Enable AOP audit logging
+
+server:
+  port: 9000
+
+logging:
+  level:
+    com.apress.sales: INFO
+    com.apress.crm.assistant: INFO

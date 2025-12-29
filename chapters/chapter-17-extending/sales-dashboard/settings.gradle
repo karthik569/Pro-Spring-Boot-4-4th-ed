@@ -1,0 +1,4 @@
+rootProject.name = 'sales-dashboard'
+
+// Include the starter project for local development
+includeBuild '../crm-assistant-starter'

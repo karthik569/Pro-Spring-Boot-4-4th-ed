@@ -1,0 +1,4 @@
+rootProject.name = 'crm-assistant-starter'
+
+include 'crm-assistant-autoconfigure'
+include 'crm-assistant-spring-boot-starter'

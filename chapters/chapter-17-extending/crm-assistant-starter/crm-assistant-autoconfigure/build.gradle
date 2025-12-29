@@ -1,0 +1,37 @@
+dependencies {
+    // Spring Boot AutoConfigure support
+    api 'org.springframework.boot:spring-boot-autoconfigure'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.springframework.boot:spring-boot-autoconfigure-processor'
+
+    // Spring AI core
+    api 'org.springframework.ai:spring-ai-core'
+
+    // Spring Framework core dependencies (needed for our code)
+    api 'org.springframework:spring-context'
+    api 'org.springframework:spring-web'
+    api 'org.springframework:spring-webflux'
+
+    // R2DBC
+    api 'org.springframework.data:spring-data-r2dbc'
+    api 'org.postgresql:r2dbc-postgresql'
+    api 'io.r2dbc:r2dbc-spi'
+
+    // AOP
+    api 'org.springframework:spring-aop'
+    api 'org.aspectj:aspectjweaver:1.9.22'
+
+    // Jackson for JSON processing
+    api 'com.fasterxml.jackson.core:jackson-databind'
+
+    // Logging
+    compileOnly 'org.slf4j:slf4j-api'
+
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
