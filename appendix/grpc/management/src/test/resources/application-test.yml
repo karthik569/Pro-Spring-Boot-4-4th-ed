@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: management-grpc-client-test
+  grpc:
+    client:
+      channels:
+        customer-service:
+          address: 'static://localhost:9090'
+          negotiation-type: plaintext
+  main:
+    allow-bean-definition-overriding: true

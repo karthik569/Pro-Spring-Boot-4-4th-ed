@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: customer-grpc-server
+
+  # Enable Virtual Threads (Java 21+)
+  threads:
+    virtual:
+      enabled: true
+
+  # gRPC Server Configuration
+  grpc:
+    server:
+      port: 9090
+
+# Actuator Configuration for Observability
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+# Logging Configuration
+logging:
+  level:
+    com.apress.prospringboot4.customer: INFO
+    org.springframework.grpc: DEBUG

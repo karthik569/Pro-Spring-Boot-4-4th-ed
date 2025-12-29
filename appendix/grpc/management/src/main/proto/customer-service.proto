@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.apress.prospringboot4.customer.grpc";
+
+service CustomerRiskService {
+  rpc GetRiskProfile (RiskRequest) returns (RiskResponse);
+}
+
+message RiskRequest {
+  string customer_id = 1;
+}
+
+message RiskResponse {
+  string customer_id = 1;
+  string risk_level = 2; // e.g., LOW, MEDIUM, HIGH
+  double score = 3;
+}
