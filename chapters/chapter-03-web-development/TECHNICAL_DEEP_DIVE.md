@@ -3,13 +3,35 @@
 ## 1. Architectural Overview
 Chapter 3 focuses on enterprise RESTful API engineering: content negotiation, JSR-380 input validation, and RFC 7807 Problem Details for standardized HTTP error responses.
 
+![Validation and RFC 7807 flow](web-validation-flow.png)
+
+<details>
+<summary>Mermaid source (re-renderable)</summary>
+
 ```mermaid
-graph TD
-    REQ[HTTP Request] --> VAL{Validation Checks<br/>@Valid, @NotBlank}
-    VAL -->|Valid| CTRL[CustomerController]
-    VAL -->|Invalid| ADVICE[CustomerControllerAdvice<br/>@RestControllerAdvice]
-    ADVICE --> PROB[RFC 7807 ProblemDetail<br/>type, title, status, detail, timestamp]
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#e0f2fe','primaryBorderColor':'#0284c7','lineColor':'#64748b'},'flowchart':{'htmlLabels':true,'curve':'basis'}}}%%
+flowchart TD
+    REQ["HTTP Request"] --> MC["Jackson deserializes body"]
+    MC --> V{{"Validation on Customer"}}
+    V -->|name blank| FAIL["Constraint violations"]
+    V -->|email invalid| FAIL
+    V -->|phone pattern| FAIL
+    V -->|all pass| CTRL["CustomerController"]
+    CTRL --> REPO[("CustomerRepository")]
+    REPO --> RESP["201 Created + Location"]
+    FAIL --> EX["MethodArgumentNotValidException"]
+    EX --> ADV["GlobalExceptionHandler"]
+    ADV --> PD["ProblemDetail RFC 7807<br/>title / status / detail / instance / errors"]
+    PD --> ERR["400 application/problem+json"]
+    classDef ok fill:#dcfce7,stroke:#15803d,color:#14532d;
+    classDef err fill:#fee2e2,stroke:#b91c1c,color:#7f1d1d;
+    classDef store fill:#ede9fe,stroke:#7c3aed,color:#4c1d95;
+    class RESP,MC,CTRL ok;
+    class FAIL,EX,ADV,PD,ERR err;
+    class REPO store;
 ```
+
+</details>
 
 ## 2. Implementation Mechanics
 - **Model Validation**:

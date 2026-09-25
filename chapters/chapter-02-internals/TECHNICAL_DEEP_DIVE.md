@@ -3,24 +3,32 @@
 ## 1. Architectural Overview
 Chapter 2 explores the core mechanics of the Spring Boot `ApplicationContext`, Bean Lifecycle, Aspect-Oriented Programming (AOP), custom configuration properties binding, and scheduled tasks.
 
+![ApplicationContext lifecycle sequence diagram](application-context-sequence.png)
+
+<details>
+<summary>Mermaid source (re-renderable)</summary>
+
 ```mermaid
 sequenceDiagram
     autonumber
+    participant User as Visitor
     participant App as CustomerApplication
-    participant Context as AnnotationConfigServletWebServerApplicationContext
+    participant Context as ApplicationContext
     participant Aspect as ControllerLoggingAspect
     participant Controller as CustomerController
     participant Task as CustomerStatsTask
-
     App->>Context: SpringApplication.run()
     Context->>Context: Scan @Configuration & @Component
-    Context->>Aspect: Instantiate Dynamic AOP Proxy
-    Context->>Task: Schedule @Scheduled background thread
-    User->>Aspect: HTTP GET /customer
-    Aspect->>Controller: Proceed with method invocation
-    Controller-->>Aspect: Return Customer List
-    Aspect->>Aspect: Log execution latency
+    Context->>Aspect: Instantiate AOP proxy
+    Context->>Task: Schedule @Scheduled thread
+    Context-->>Context: publish ApplicationReadyEvent
+    User->>Aspect: HTTP GET /api/v1/customers
+    Aspect->>Controller: proceed()
+    Controller-->>Aspect: return Customer list
+    Aspect->>Aspect: log execution latency
 ```
+
+</details>
 
 ## 2. Key Component Deep Dive
 ### AOP Execution Interception (`ControllerLoggingAspect`)
